@@ -1,0 +1,71 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 105px;
+    height: 55px;
+}
+
+.navbar-brand {
+    margin-left: 100px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.contact-bkcse{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+@keyframes contactrightmove{
+    from{ right: 0px;}
+    to{ right: 20px;}
+}
+
+@keyframes contactleftmove{
+    from{ left: 0px;}
+    to{ left: 20px;}
+}
+.slide {
+        animation-name: contactrightmove;
+        animation-duration: 5s;
+        animation-iteration-count: 1;
+        position: absolute;
+        width: 100px;
+        height: 300px;
+        padding: 10px;
+}
+
+.slideamin {
+    animation-name: contactleftmove;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+    position: absolute;
+    width: 100px;
+    height: 300px;
+    padding: 10px;
+}
+#lightstatus {
+    background-color:indianred;
+    margin:10px;
+    margin-left: 20px;
+}
+
+#time {
+    width: 200px;
+    padding:15px;
+    font-size:2.5em;
+    font-family: verdana;
+    background:teal;
+    color: white;
+    border-radius:10px;
+    text-align: center;
+}
+h3 { 
+    text-align: center;
+    font-family: verdana;
+}
+
+.textdiachi{
+    padding-left: 15px;
+}
