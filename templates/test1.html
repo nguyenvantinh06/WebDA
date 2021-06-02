@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<body>
+<a href="javascript:DoPost()">Click Here</a>
+	<input type = "text" id = "method" />
+	<input type = "text" id = "nm" />
+	<input type = "text" id = "nm1" />
+	<input type = "text" id = "nm2" />
+	<label for="textfield" id="display">Text Field:</label>
+</body>
+	<script>
+		function DoPost(){
+		  const Http = new XMLHttpRequest();
+			const url='/info/';
+			Http.open('POST', url);
+			Http.send(JSON.stringify({"command":document.getElementById("method").value, "args":{
+															"attribute": document.getElementById("nm").value, 
+															"light id": parseInt(document.getElementById("nm1").value),
+															"value": document.getElementById("nm2").value
+									 						}
+									 }));
+			
+			Http.onload = function(){
+				if (Http.readyState === Http.DONE) {
+        			if (Http.status === 200) {
+						console.log(Http.response, typeof(Http.response));
+						var response = JSON.parse(Http.response);
+						var display = document.getElementById("display");
+						display.innerHTML = response["status"];
+					}
+				}
+			}
+	   }
+	</script>
+</html>
