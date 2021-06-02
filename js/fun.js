@@ -1,5 +1,5 @@
-window.pageTrafficLights = function ()
-{
+
+
     var TrafficLight = function ()
     {
         var colors = {
@@ -95,4 +95,3 @@ window.pageTrafficLights = function ()
             parseInt(content.find("#input_2").val()),
             parseInt(content.find("#input_3").val()));
     });
-}
