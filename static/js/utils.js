@@ -51,6 +51,8 @@ function swap()
     console.log(current_light_id);
     if (state === 0) turn_on();
     else shutdown();
+    if (state) shutdown();
+    else turn_on();
 }
 
 function update()
@@ -66,6 +68,7 @@ function activate()
                         if (res['status'] === 'success')
                         {
                             request('GET', {'attribute':'database', 'light id':current_light_id}, (res, args) => current_light_info = res['data'], null);
+                            current_light_info['activated'] = !current_light_info['activated'];
                             update();
                         }
         }, null);
