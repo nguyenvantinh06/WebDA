@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="row">
-          <div class="row" style="width: 400px">
+          <div class="row">
 			  <div class="col-sm-4">
 				<div class="traffic-light">
 				  <div class="protector"></div>
@@ -68,9 +68,9 @@
                 <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
             </div>
-			<div class="col-12 text-center">
+			<div class="col-12">
 				<div class="tatden">
-				  <button type="submit" class="btn btn-primary" id="switch" style="background: red; color:black;"> Shutdown </button>
+				  <button type="submit" class="btn btn-primary" id="switch" style="background: red; color:black;" onclick="activate()"> Shutdown </button>
 				</div>
 			</div>
           </div>
@@ -105,7 +105,7 @@
     <div class="col-sm-8" id="map" style="width: 900px; height: 750px;"></div> 
         <script>
             function initialize() {
-              
+              const n_lights = 3;
               var locations = [
                 ['Traffic Light 3', 10.770405280458643, 106.65812003320247, 3],
                 ['Traffic Light 2', 10.763890083944078, 106.65998308150542, 2],
@@ -124,17 +124,7 @@
               var marker, i;
           
               for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
-                  position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                  map: map
-                });
-          
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                  return function() {
-                    infowindow.setContent(locations[i][0]);
-                    infowindow.open(map, marker);
-                  }
-                })(marker, i));
+                request('GET', {'attribute': 'location', 'light id': i + 1}, set_marker, {'i':i, 'info': infowindow, 'google':google, 'map':map});
               }
             }
           
@@ -154,5 +144,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="static/js/fun.js"></script>
+    <script src="static/js/utils.js"></script>
 </body>
 </html>

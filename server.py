@@ -69,7 +69,12 @@ def process(comm, args):
                     'select manual, density, waiting_time, running_time, strength from Light_Attributes where id = {}'.format(
                         light_id)
                 )[0]
+                activated = utils.access_database(
+                    'select activated from Lights where id = {}'.format(
+                        light_id)
+                )[0][0]
                 data = {
+                    'activated'     : activated,
                     'strength'      : strength,
                     'manual'        : manual,
                     'density'       : density,
