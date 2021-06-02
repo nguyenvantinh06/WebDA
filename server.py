@@ -12,7 +12,7 @@ utils.load_keys()
 #       }
 #   args: // SET
 #       {
-#           attribute:  ['manual', 'waiting time', 'running time', 'strength', 'activated'],
+#           attribute:  ['manual', 'activated', 'attributes'],
 #           light id: int
 #           value: <your value>
 #       }
@@ -92,14 +92,12 @@ def process(comm, args):
 
             if attribute == 'manual':
                 utils.update_manual(light_id, (True if int(value) == 1 else False))
-            elif attribute == 'waiting time':
-                utils.update_waiting_time(light_id, value)
-            elif attribute == 'running time':
-                utils.update_running_time(light_id, value)
-            elif attribute == 'strength':
-                utils.update_strength(light_id, value)
             elif attribute == 'activated':
                 utils.update_activated(light_id, (True if int(value) == 1 else False))
+            elif attribute == 'attributes':
+                utils.update_waiting_time(light_id, value['waiting time'])
+                utils.update_running_time(light_id, value['running time'])
+                utils.update_strength(light_id, value['strength'])
             else:
                 raise Exception('Not such an attribute ' + attribute)
         else:

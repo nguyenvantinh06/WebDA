@@ -146,6 +146,20 @@ def update_manual(light_id, status):
     database.commit()
     database.close()
 
+def check_manual(func):
+    def _func(*args, **kargs):
+        light_id = args[0]
+        manual = access_database(
+            'select manual from Light_Attributes where id = {}'.format(
+                light_id)
+        )[0][0]
+        if manual:
+            return func(*args, **kargs)
+        else:
+            raise exceptions.ManualControlNotGranted()
+    return _func
+
+@check_manual
 def update_strength(light_id, value):
     value = float(value)
     database = Database.init_database(DB_NAME, DB_USER)
@@ -154,6 +168,7 @@ def update_strength(light_id, value):
     database.commit()
     database.close()
 
+@check_manual
 def update_waiting_time(light_id, t):
     t = int(t)
     database = Database.init_database(DB_NAME, DB_USER)
@@ -162,6 +177,7 @@ def update_waiting_time(light_id, t):
     database.commit()
     database.close()
 
+@check_manual
 def update_running_time(light_id, t):
     t = int(t)
     database = Database.init_database(DB_NAME, DB_USER)
@@ -170,6 +186,7 @@ def update_running_time(light_id, t):
     database.commit()
     database.close()
 
+@check_manual
 def update_density(light_id, value):
     value = float(value)
     if not (0 <= value <= 1):
@@ -180,6 +197,7 @@ def update_density(light_id, value):
     database.commit()
     database.cmd_quit()
 
+@check_manual
 def update_activated(light_id, status):
     if status not in [True, False]:
         raise exceptions.InvalidValue(status)

@@ -26,7 +26,15 @@ function request(command, data, callback, args=null)
 
 function update_manual(value)
 {
-
+    request('SET',
+            {'attribute':'manual', 'light id':current_light_id, 'value':!current_light_info['manual']},
+        (res, args)=>{
+                        if (res['status'] === 'success')
+                        {
+                            current_light_info['manual'] = !current_light_info['manual'];
+                            update();
+                        }
+        }, null);
 }
 
 function turn_on()
@@ -49,8 +57,6 @@ function swap()
 {
     const state = current_light_info['activated'];
     console.log(current_light_id);
-    if (state === 0) turn_on();
-    else shutdown();
     if (state) shutdown();
     else turn_on();
 }
@@ -67,7 +73,6 @@ function activate()
         (res, args)=>{
                         if (res['status'] === 'success')
                         {
-                            request('GET', {'attribute':'database', 'light id':current_light_id}, (res, args) => current_light_info = res['data'], null);
                             current_light_info['activated'] = !current_light_info['activated'];
                             update();
                         }
@@ -98,7 +103,6 @@ function set_marker(response, args)
                     (res, args) => {
                                 current_light_info = res['data'];
                                 update();
-                                console.log(document.getElementById('switch').textContent)
                             }, null);
       }
     })(marker, i));

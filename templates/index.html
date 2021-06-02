@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Traffic Management</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <title>Quản lý giao thông</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -15,89 +14,62 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="row">
-          <div class="row" style="width: 400px">
-			    <div class="col-sm-4">
-				    <div class="traffic-light">
-				      <div class="protector"></div>
-				      <div class="protector"></div>
-				      <div class="light-red"></div>
-				      <div class="light-yellow"></div>
-				      <div class="light-green"></div>
-				    </div>
-				  </div>
-        </div>
-				<div class="col-sm-8">
-				  <div id="thongtinden">
-					<p class="den">Information</p>
-					<h3 id="light_id"> ID: 1</h3>
-					<h3 id="strength"> Strength: 10</h3>
-					<h3 id="density"> Destiny: 1</h3>
-					<h3 id="waiting_time"> Waiting Time: 100s</h3>
-					<h3 id="running_time"> Running Time: 100s</h3>
-				  </div>
-				</div>
-      	</div>
-        <div class="col-sm-12 form-inline col-xl-9">
-          <div class="card">
-            <div class="card-header btn"  data-toggle="collapse" data-target="#noidungcard">
-                Bấm vào để hiển thị nội dung
-            </div>
-            <div class="card-body collapse"  data-toggle="collapse"  aria-expanded="false" id="noidungcard">
-                <h5 class="card-title">Tiêu đề Card</h5>
-                <h6 class="card-subtitle mb-1 text-muted">Ví dụ mẫu sử dụng Card</h6>
-                <p class="card-text">Nội dung văn bản trong <code>.card-body</code> này sử dụng <code>.card-text</code>.</p>
-                <a href="#" class="btn btn-primary">Nút bấm</a>
-            </div>
-        </div>
+          <div class="col-sm-12" id= "time">
+            <script>
+              function dongho(){
+                var time = new Date();
+                var gio = time.getHours();
+                var phut= time.getMinutes();
+                var giay=time.getSeconds();
+                if (gio<10)
+                  gio = "0" + gio;
+                if (phut<10)
+                  phut = "0" + phut;
+                if (giay<10)
+                  giay = "0" + giay;
+                document.getElementById("time").innerHTML = gio + ":" + phut + ":" + giay;
+                setTimeout("dongho()",1000);
+              }
+              dongho();
+            </script>
           </div>
-          <div class="col-sm-12 col-xl-9">
-          <div id="content" style="border: solid 1px; padding: 10px; background: #ddd;">
-            <div class="form-group row">
-              <label for="inputtime" class="col-sm-4 col-form-label">Waiting Time:</label>
-              <div class="col-sm-8">
-                <input type="number" class="form-control" id="inputtime1" placeholder="5" min="5" max="120">
-              </div>
+          <div class="row">
+          <div class="col-sm-4">
+            <div class="traffic-light">
+              <div class="protector"></div>
+              <div class="protector"></div>
+              <div class="protector"></div>
+              <div class="light-red"></div>
+              <div class="light-yellow"></div>
+              <div class="light-green"></div>
             </div>
-            <div class="form-group row">
-              <label for="inputtime" class="col-sm-4 col-form-label">Strength:</label>
-              <div class="col-sm-8">
-                <input type="number" class="form-control" id="inputtime2" placeholder="10" min="5" max="120">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary">Set</button>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-              </div>
-            </div>
-			<div class="col-12 text-center">
-				<div class="tatden">
-				  <button type="submit" class="btn btn-primary" id="switch" style="background: red; color:black;"> Shutdown </button>
-				</div>
-			</div>
-          </div>
-          <script>
-            document.getElementById("btn1").checked = function () {
-                document.getElementById("content").style.display = 'none';
-            };
-            document.getElementById("btn1").onclick = function () {
-                document.getElementById("content").style.display = 'none';
-            };
-            document.getElementById("btn2").onclick = function () {
-                document.getElementById("content").style.display = 'block';
-            };
-
-        </script>
         </div>
-          <div class="col-sm-12 col-xl-9">
+        <div class="col-sm-8">
+          <div id="thongtinden">
+            <p>Thông tin đèn tín hiệu</p>
+          </div>
+        </div>
+      </div>
+          <div class="col-sm-12">
             <h3>Tìm kiếm đèn theo ID hoặc Khu Vực</h3>
             <div class="row">
-                <h4 class="textdiachi">Nhập ID đèn</h4>
-                <div class="col-sm-12 form-group col-xl-12">
+                <h5 class="textdiachi">Nhập ID đèn</h4>
+                <div class="col-sm-12 form-group">
                     <input class="form-control" id="id" name="id" placeholder="D123" type="text" required>
                 </div>
+                <h5 class="textdiachi">Hoặc nhập địa chỉ muốn tìm kiếm</h2>
+                  
+                <div class="col-sm-12 form-group">
+                    <input class="form-control" id="street" name="street" placeholder="Lý Thường Kiệt" type="text" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="phuong" name="phuong" placeholder="Phường 10" type="text" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="phuong" name="quan" placeholder="Quận 10" type="text" required>
+                </div>
                 <div class="col-sm-12 form-group text-center">
-                    <button type="search" class="btn btn-default">Search</button>
+                    <button type="search" class="btn btn-default">Tìm kiếm</button>
                 </div>
                 
             </div>
@@ -107,13 +79,11 @@
     <div class="col-sm-8" id="map" style="width: 900px; height: 750px;"></div> 
         <script>
             function initialize() {
-              
               var locations = [
-                ['Traffic Light 3', 10.770405280458643, 106.65812003320247, 3],
-                ['Traffic Light 2', 10.763890083944078, 106.65998308150542, 2],
-                ['Traffic Light 1', 10.776432979370345, 106.66355700021649, 1]
+                ['ID:1,Strength:10,Destiny:1, Waiting Time:100', 10.770405280458643, 106.65812003320247, 3],
+                ['DESCRIPTION', 10.763890083944078, 106.65998308150542, 2],
+                ['DESCRIPTION', 10.776432979370345, 106.66355700021649, 1]
               ];
-              
           
               var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
@@ -154,7 +124,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-    <script src="static/js/fun.js"></script>
+    <script src="js/fun.js"></script>
 </body>
 </html>

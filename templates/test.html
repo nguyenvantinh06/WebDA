@@ -29,69 +29,33 @@
 				<div class="col-sm-8">
 				  <div id="thongtinden">
 					<p class="den">Information</p>
-					<h3 id="light_id"> ID: 1</h3>
-					<h3 id="strength"> Strength: 10</h3>
-					<h3 id="density"> Destiny: 1</h3>
-					<h3 id="waiting_time"> Waiting Time: 100s</h3>
-					<h3 id="running_time"> Running Time: 100s</h3>
+					<h5 id="light_id"> ID: 1</h5>
+					<h5 id="strength"> Strength: 10</h5>
+					<h5 id="density"> Destiny: 1</h5>
+					<h5 id="waiting_time"> Waiting Time: 100s</h5>
+					<h5 id="running_time"> Running Time: 100s</h5>
 				  </div>
 				</div>
-      </div>
-      <div class="col-sm-12 col-xl-9 card">
-        <div class="card-header btn"  data-toggle="collapse" data-target="#noidungcard">
-          Mở chế độ điều khiển bằng tay >>
-        </div>
-        <div class="card-body collapse" aria-expanded="false" id="noidungcard">
-        <div style="border: solid 1px; padding: 10px; background: #ddd;">
-        <div class="form-group row">
-          <label for="inputtime" class="col-sm-4 col-form-label">Waiting Time:</label>
-          <div class="col-sm-8">
-            <input type="number" class="form-control" id="waiting-time" placeholder="second(s)" min="5" max="120">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputtime" class="col-sm-4 col-form-label">Running Time:</label>
-          <div class="col-sm-8">
-            <input type="number" class="form-control" id="running-time" placeholder="second(s)" min="5" max="120">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputtime" class="col-sm-4 col-form-label">Strength:</label>
-          <div class="col-sm-8">
-            <input type="number" class="form-control" id="light-strength" placeholder="%" min="5" max="120">
-          </div>
-<<<<<<< HEAD
-        </div>
-        <div class="row">
-          <div class="col-12 text-center">
-            <button type="submit" class="btn btn-primary">Set</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-            <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#noidungcard">>></button>
-          </div>
-        </div>
-  <div class="col-12 text-center">
-    <div class="tatden">
-      <button type="submit" class="btn btn-primary" id="switch" style="background: red; color:black; margin-top:10px" onclick="activate()"> Shutdown </button>
-    </div>
-    </div>
-<<<<<<< Updated upstream
-=======
-          <div class="col-sm-12 col-xl-9">
-          <div id="content" style="border: solid 1px; padding: 10px; background: #ddd;">
+      	</div>
+          <div class="col-sm-12 col-xl-9 card">
+              <div class="card-header btn"  data-toggle="collapse" data-target="#content">
+                Mở chế độ điều khiển bằng tay
+              </div>
+          <div class="card-body collapse" id="content" style="border: solid 1px; padding: 10px; background: #ddd;">
             <div class="form-group row">
-              <label for="inputtime" class="col-sm-4 col-form-label">Waiting Time:</label>
+              <label for="waiting-time" class="col-sm-4 col-form-label">Waiting Time:</label>
               <div class="col-sm-8">
                 <input type="number" class="form-control" id="waiting-time" placeholder="second(s)" min="5" max="120">
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputtime" class="col-sm-4 col-form-label">Running Time:</label>
+              <label for="running-time" class="col-sm-4 col-form-label">Running Time:</label>
               <div class="col-sm-8">
                 <input type="number" class="form-control" id="running-time" placeholder="second(s)" min="5" max="120">
               </div>
             </div>
 			<div class="form-group row">
-              <label for="inputtime" class="col-sm-4 col-form-label">Strength:</label>
+              <label for="light-strength" class="col-sm-4 col-form-label">Strength:</label>
               <div class="col-sm-8">
                 <input type="number" class="form-control" id="light-strength" placeholder="%" min="5" max="120">
               </div>
@@ -102,22 +66,18 @@
                 <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
             </div>
->>>>>>> 5de70d89fc2593dd2a2092df2b72183bf10822fa
 			<div class="col-12">
 				<div class="tatden">
 				  <button type="submit" class="btn btn-primary" id="switch" style="background: red; color:black;" onclick="activate()"> Shutdown </button>
 				</div>
 			</div>
-=======
->>>>>>> Stashed changes
           </div>
         </div>
-      </div>
           <div class="col-sm-12 col-xl-9">
-            <h4>Tìm kiếm đèn theo ID</h4>
+            <h5 class="text-center">Search Lights by ID</h5>
             <div class="row">
                 <div class="col-sm-12 form-group col-xl-12">
-                    <input class="form-control" id="id" name="id" placeholder="123" type="text" required>
+                    <input class="form-control" id="id" name="id" placeholder="D123" type="text" required>
                 </div>
                 <div class="col-sm-12 form-group text-center">
                     <button type="search" class="btn btn-default">Search</button>
@@ -127,7 +87,7 @@
           </div>
         </div>
       </div>
-    <div class="col-sm-8" id="map" style="width: 900px; height: 100%;"></div> 
+    <div class="col-sm-8" id="map" style="width: 900px; height: 900px;"></div> 
         <script>
             function initialize() {
               const n_lights = 3;
