@@ -49,8 +49,8 @@ function swap()
 {
     const state = current_light_info['activated'];
     console.log(current_light_id);
-    if (state === 0) turn_on();
-    else shutdown();
+    if (state) shutdown();
+    else turn_on();
 }
 
 function update()
@@ -65,7 +65,7 @@ function activate()
         (res, args)=>{
                         if (res['status'] === 'success')
                         {
-                            request('GET', {'attribute':'database', 'light id':current_light_id}, (res, args) => current_light_info = res['data'], null);
+                            current_light_info['activated'] = !current_light_info['activated'];
                             update();
                         }
         }, null);
@@ -95,7 +95,6 @@ function set_marker(response, args)
                     (res, args) => {
                                 current_light_info = res['data'];
                                 update();
-                                console.log(document.getElementById('switch').textContent)
                             }, null);
       }
     })(marker, i));

@@ -44,7 +44,7 @@
             <label class="form-check-label" for="inlineRadio1"><h3>OFF</h3></label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="btn2" value="ON" >
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="btn2" value="ON">
             <label class="form-check-label" for="inlineRadio2"><h3>ON</h3></label>
           </div>
           </div>
@@ -53,13 +53,19 @@
             <div class="form-group row">
               <label for="inputtime" class="col-sm-4 col-form-label">Waiting Time:</label>
               <div class="col-sm-8">
-                <input type="number" class="form-control" id="inputtime1" placeholder="5" min="5" max="120">
+                <input type="number" class="form-control" id="waiting-time" placeholder="second(s)" min="5" max="120">
               </div>
             </div>
             <div class="form-group row">
+              <label for="inputtime" class="col-sm-4 col-form-label">Running Time:</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="running-time" placeholder="second(s)" min="5" max="120">
+              </div>
+            </div>
+			<div class="form-group row">
               <label for="inputtime" class="col-sm-4 col-form-label">Strength:</label>
               <div class="col-sm-8">
-                <input type="number" class="form-control" id="inputtime2" placeholder="10" min="5" max="120">
+                <input type="number" class="form-control" id="light-strength" placeholder="%" min="5" max="120">
               </div>
             </div>
             <div class="row">
@@ -88,9 +94,8 @@
         </script>
         </div>
           <div class="col-sm-12 col-xl-9">
-            <h3>Tìm kiếm đèn theo ID hoặc Khu Vực</h3>
+            <h4>Tìm kiếm đèn theo ID</h4>
             <div class="row">
-                <h4 class="textdiachi">Nhập ID đèn</h4>
                 <div class="col-sm-12 form-group col-xl-12">
                     <input class="form-control" id="id" name="id" placeholder="D123" type="text" required>
                 </div>
