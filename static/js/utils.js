@@ -4,7 +4,10 @@ let current_light_id = null;
 
 function collect_inputs()
 {
-
+    const strength = document.getElementById('light-strength').value;
+    const run = document.getElementById('running-time').value;
+    const wait = document.getElementById('waiting-time').value;
+    return {'running time':run, 'waiting time':wait, 'strength':strength};
 }
 
 function request(command, data, callback, args=null)
@@ -24,7 +27,7 @@ function request(command, data, callback, args=null)
     }
 }
 
-function update_manual(value)
+function update_manual()
 {
     request('SET',
             {'attribute':'manual', 'light id':current_light_id, 'value':!current_light_info['manual']},
@@ -61,9 +64,89 @@ function swap()
     else turn_on();
 }
 
+function set()
+{
+    const data = collect_inputs();
+    console.log(data);
+    request('SET',
+            {
+                    'attribute':'attributes',
+                    'light id': current_light_id,
+                    'value': data
+            }, (res, args) => {
+                    request('GET',
+                        {
+                                'attribute':'status',
+                                'light id':current_light_id
+                            },
+                        (res, args) => {
+                                current_light_info = res['data'];
+                                update();
+                            }, null);
+        }, null);
+}
+
+function reset()
+{
+
+}
+
 function update()
 {
     swap();
+    document.getElementById('light_id').innerHTML = "ID: " + current_light_id;
+    document.getElementById('strength').innerHTML = "Strength: " + current_light_info['strength'];
+    document.getElementById('density').innerHTML = "Destiny: " + current_light_info['density'];
+    document.getElementById('waiting_time').innerHTML = "Waiting Time: " + current_light_info['waiting time'];
+    document.getElementById('running_time').innerHTML = "Running Time: " + current_light_info['running time'];
+
+    if (current_light_info['manual'])
+        document.getElementById('content').classList.toggle('show', true);
+    else document.getElementById('content').classList.toggle('show', false);
+
+    document.getElementById('light-strength').placeholder = current_light_info['strength'];
+    document.getElementById('waiting-time').placeholder = current_light_info['waiting time'];
+    document.getElementById('running-time').placeholder = current_light_info['running time'];
+
+    document.getElementById('light-strength').defaultValue = current_light_info['strength'];
+    document.getElementById('waiting-time').defaultValue = current_light_info['waiting time'];
+    document.getElementById('running-time').defaultValue = current_light_info['running time'];
+
+    const css_on = {
+        'red':'background: repeating-linear-gradient(#f00, #e00 5px);\n' +
+            '        box-shadow: 0 0 40px #f00;\n' +
+            '        z-index: 1;',
+        'yellow':'background: repeating-linear-gradient(#fd0, #ec0 5px);\n' +
+            '        box-shadow: 0 0 40px #fd0;\n' +
+            '        z-index: 1;',
+        'green':'background: repeating-linear-gradient(#0d0, #0c0 5px);\n' +
+            '        box-shadow: 0 0 40px #0d0;\n' +
+            '        z-index: 1;'
+    };
+
+    const css_off = {
+        'red':'background: repeating-linear-gradient(#333, #443 5px);\n' +
+            '        box-shadow: 0 0 0px #000;\n' +
+            '        z-index: 1;',
+        'yellow':'background: repeating-linear-gradient(#333, #443 5px);\n' +
+            '        box-shadow: 0 0 0px #000;\n' +
+            '        z-index: 1;',
+        'green':'background: repeating-linear-gradient(#333, #443 5px);\n' +
+            '        box-shadow: 0 0 0px #000;\n' +
+            '        z-index: 1;'
+    };
+
+    const name = ['green', 'red', 'yellow'];
+    const index = current_light_info['signal'];
+
+    for (let i = 1; i <= name.length; i++)
+    {
+        let css = css_off;
+        if (i === index) css = css_on;
+
+        const doc = document.getElementById(name[i - 1]);
+        doc.style.cssText = css[name[i - 1]];
+    }
 }
 
 function activate()
@@ -99,7 +182,7 @@ function set_marker(response, args)
         infowindow.open(map, marker);
         current_light_id = i + 1;
         request('GET',
-                        {'attribute':'database', 'light id':i + 1},
+                        {'attribute':'status', 'light id':i + 1},
                     (res, args) => {
                                 current_light_info = res['data'];
                                 update();
@@ -107,3 +190,14 @@ function set_marker(response, args)
       }
     })(marker, i));
 }
+
+// renew status after 20s
+setInterval(()=>{
+    if (current_light_id != null)
+        request('GET',
+                {'attribute':'status', 'light id':current_light_id},
+            (res, args) => {
+                        current_light_info = res['data'];
+                        update();
+                    }, null);
+}, 1000);

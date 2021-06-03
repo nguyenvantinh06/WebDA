@@ -1,5 +1,5 @@
 import utils
-utils.load_keys()
+import exceptions
 
 # Request form:
 # {
@@ -33,8 +33,8 @@ def process(comm, args):
                     'select Loc, Lat, activated from Lights where id = {}'.format(light_id)
                 )[0]
 
-                manual, density, wait, running = utils.access_database(
-                    'select manual, density, waiting_time, running_time from Light_Attributes where id = {}'.format(
+                manual, density, wait, running, strength = utils.access_database(
+                    'select manual, density, waiting_time, running_time, strength from Light_Attributes where id = {}'.format(
                         light_id
                     )
                 )[0]
@@ -42,7 +42,7 @@ def process(comm, args):
                     'manual'        : manual,
                     'activated'     : activated,
                     'signal'        : utils.get_traffic_light_values(adafruit_io_client[0]),
-                    'strength'      : utils.light_sensor_to_strength(utils.get_light_strength_values(adafruit_io_client[1])),
+                    'strength'      : strength,
                     'density'       : density,
                     'waiting time'  : wait,
                     'running time'  : running,
@@ -87,6 +87,14 @@ def process(comm, args):
             light_id = args['light id']
             attribute = args['attribute']
             value = args['value']
+
+            if attribute != 'manual':
+                manual = utils.access_database(
+                    'select manual from Light_Attributes where id = {}'.format(
+                        light_id)
+                )[0][0]
+                if not manual:
+                    raise exceptions.ManualControlNotGranted()
 
             data = ''
 

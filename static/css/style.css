@@ -55,9 +55,6 @@ body {
     height: 60px;
     border-radius: 50%;
     background: repeating-linear-gradient(#333, #443 5px);
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    animation-timing-function: step-end;
 }
 
 .light-red {

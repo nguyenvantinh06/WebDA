@@ -21,25 +21,25 @@
 				  <div class="protector"></div>
 				  <div class="protector"></div>
 
-				  <div class="light-red"></div>
-				  <div class="light-yellow"></div>
-				  <div class="light-green"></div>
+				  <div class="light-red" id="red"></div>
+				  <div class="light-yellow" id="yellow"></div>
+				  <div class="light-green" id="green"></div>
 				</div>
 				</div>
 				<div class="col-sm-8">
 				  <div id="thongtinden">
 					<p class="den">Information</p>
-					<h5 id="light_id"> ID: 1</h5>
-					<h5 id="strength"> Strength: 10</h5>
-					<h5 id="density"> Destiny: 1</h5>
-					<h5 id="waiting_time"> Waiting Time: 100s</h5>
-					<h5 id="running_time"> Running Time: 100s</h5>
+					<h5 id="light_id"> ID: </h5>
+					<h5 id="strength"> Strength: </h5>
+					<h5 id="density"> Destiny: </h5>
+					<h5 id="waiting_time"> Waiting Time: </h5>
+					<h5 id="running_time"> Running Time: </h5>
 				  </div>
 				</div>
       	</div>
           <div class="col-sm-12 col-xl-9 card">
-              <div class="card-header btn"  data-toggle="collapse" data-target="#content">
-                Mở chế độ điều khiển bằng tay
+              <div class="card-header btn"  data-toggle="collapse" data-target="#content" onclick="update_manual()">
+                Manual Control
               </div>
           <div class="card-body collapse" id="content" style="border: solid 1px; padding: 10px; background: #ddd;">
             <div class="form-group row">
@@ -62,8 +62,8 @@
             </div>
             <div class="row">
               <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary">Set</button>
-                <button type="reset" class="btn btn-secondary">Reset</button>
+                <button type="submit" class="btn btn-primary" onclick="set()">Set</button>
+                <button type="reset" class="btn btn-secondary" onclick="reset()">Reset</button>
               </div>
             </div>
 			<div class="col-12">
