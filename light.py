@@ -92,4 +92,4 @@ def light(light_id, yellow_time = 2):
             utils.set_traffic_light_values(clients[0], utils.LIGHT_VALUES.OFF)
             time.sleep(5)
 
-light(1)
+light(1, yellow_time=5)

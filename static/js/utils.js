@@ -200,4 +200,4 @@ setInterval(()=>{
                         current_light_info = res['data'];
                         update();
                     }, null);
-}, 1000);
+}, 3000);
