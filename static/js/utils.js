@@ -1,4 +1,5 @@
 const url = '/info/';
+const COMM = 'database'
 let current_light_info = null;
 let current_light_id = null;
 
@@ -182,7 +183,7 @@ function set_marker(response, args)
         infowindow.open(map, marker);
         current_light_id = i + 1;
         request('GET',
-                        {'attribute':'status', 'light id':i + 1},
+                        {'attribute':COMM, 'light id':i + 1},
                     (res, args) => {
                                 current_light_info = res['data'];
                                 update();
@@ -195,7 +196,7 @@ function set_marker(response, args)
 setInterval(()=>{
     if (current_light_id != null)
         request('GET',
-                {'attribute':'status', 'light id':current_light_id},
+                {'attribute':COMM, 'light id':current_light_id},
             (res, args) => {
                         current_light_info = res['data'];
                         update();
