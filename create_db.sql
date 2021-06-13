@@ -22,7 +22,7 @@ add foreign key (light_id) references Lights(id);
 /*Fake data*/
 insert into Lights(Loc, Lat) values(10.776432979370345, 106.66355700021649);
 insert into Lights(Loc, Lat) values(10.763890083944078, 106.65998308150542);
-insert into Lights(Loc, Lat) values(10.776432979370345, 106.66355700021649);
+insert into Lights(Loc, Lat) values(10.770405280458643, 106.65812003320247);
 
 insert into Light_Attributes(light_id, waiting_time, running_time, strength, density, manual)
 values (1, 10, 20, 400, 0.2, FALSE);

@@ -9,7 +9,7 @@ USERNAME    = ['CSE_BBC', 'CSE_BBC1']
 KEY         = None
 
 DB_NAME = 'DA'
-DB_USER = 'ODBC'
+DB_USER = 'ODBC1'
 
 class LIGHT_VALUES:
     OFF     = 0
