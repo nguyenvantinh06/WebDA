@@ -2,6 +2,7 @@ const url = '/info/';
 const COMM = 'status'
 let current_light_info = null;
 let current_light_id = null;
+let skip = false;
 
 function collect_inputs()
 {
@@ -157,6 +158,7 @@ function activate()
         (res, args)=>{
                         if (res['status'] === 'success')
                         {
+                            skip = true;
                             current_light_info['activated'] = !current_light_info['activated'];
                             update();
                         }
@@ -194,11 +196,12 @@ function set_marker(response, args)
 
 // renew status after 20s
 setInterval(()=>{
-    if (current_light_id != null)
+    if ((current_light_id != null) && !skip)
         request('GET',
                 {'attribute':COMM, 'light id':current_light_id},
             (res, args) => {
                         current_light_info = res['data'];
                         update();
                     }, null);
+    skip = false;
 }, 3000);

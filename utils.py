@@ -6,7 +6,7 @@ import datetime
 import mysql.connector as db_conn
 
 DEFAULT_USERNAME = ['VuNguyenLong', 'VuNguyenLong']
-DEFAULT_KEY = ['aio_Vvwg53dGSVeKSHOyizGKkQVtWKvW', 'aio_Vvwg53dGSVeKSHOyizGKkQVtWKvW']
+DEFAULT_KEY = ['aio_hVrb39Wyk0s0B9QuS0xTUnguG6ke', 'aio_hVrb39Wyk0s0B9QuS0xTUnguG6ke']
 
 USERNAME    = ['CSE_BBC', 'CSE_BBC1']
 KEY         = None
