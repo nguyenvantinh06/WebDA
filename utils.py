@@ -5,11 +5,14 @@ import math
 import datetime
 import mysql.connector as db_conn
 
+DEFAULT_USERNAME = ['VuNguyenLong', 'VuNguyenLong']
+DEFAULT_KEY = ['aio_Vvwg53dGSVeKSHOyizGKkQVtWKvW', 'aio_Vvwg53dGSVeKSHOyizGKkQVtWKvW']
+
 USERNAME    = ['CSE_BBC', 'CSE_BBC1']
 KEY         = None
 
 DB_NAME = 'DA'
-DB_USER = 'ODBC1'
+DB_USER = 'ODBC'
 
 class LIGHT_VALUES:
     OFF     = 0
@@ -56,6 +59,7 @@ class Database:
 
 def load_keys():
     global KEY
+    global USERNAME
     try:
         file = open('keys.txt', 'r')
         KEY = list(map(lambda x: x.replace('\n', ''), file.readlines()))
@@ -64,15 +68,23 @@ def load_keys():
         for i in range(len(KEY)):
             Client(USERNAME[i], KEY[i]).feeds()
     except RequestError:
-        print('Errors happened. Request keys...')
-        import requests
-        res = json.loads(requests.get('http://dadn.esp32thanhdanh.link').text)
-        KEY = [res['keyBBC'], res['keyBBC1']]
+        try:
+            print('Errors happened. Request keys...')
+            import requests
+            res = json.loads(requests.get('http://dadn.esp32thanhdanh.link').text)
+            KEY = [res['keyBBC'], res['keyBBC1']]
 
-        file = open('keys.txt', 'w')
-        file.writelines(list(map(lambda x: x + '\n', KEY)))
-        file.close()
-        print('Key has been updated')
+            file = open('keys.txt', 'w')
+            file.writelines(list(map(lambda x: x + '\n', KEY)))
+            file.close()
+            print('Key has been updated')
+
+            for i in range(len(KEY)):
+                Client(USERNAME[i], KEY[i]).feeds()
+        except:
+            print('Error happend, using default keys')
+            USERNAME = DEFAULT_USERNAME
+            KEY = DEFAULT_KEY
 load_keys()
 
 

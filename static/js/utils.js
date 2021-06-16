@@ -1,5 +1,5 @@
 const url = '/info/';
-const COMM = 'database'
+const COMM = 'status'
 let current_light_info = null;
 let current_light_id = null;
 
