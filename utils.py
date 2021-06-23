@@ -5,14 +5,14 @@ import math
 import datetime
 import mysql.connector as db_conn
 
-DEFAULT_USERNAME = ['VuNguyenLong', 'VuNguyenLong']
-DEFAULT_KEY = ['aio_hVrb39Wyk0s0B9QuS0xTUnguG6ke', 'aio_hVrb39Wyk0s0B9QuS0xTUnguG6ke']
+DEFAULT_USERNAME = ['VuNguyenLong']*2
+DEFAULT_KEY = ['aio_Iwky10iEp5l1D0bisPDBDYn3J7s9']*2
 
 USERNAME    = ['CSE_BBC', 'CSE_BBC1']
 KEY         = None
 
 DB_NAME = 'DA'
-DB_USER = 'ODBC1'
+DB_USER = 'ODBC'
 
 class LIGHT_VALUES:
     OFF     = 0

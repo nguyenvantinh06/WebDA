@@ -1,0 +1,10 @@
+// manually create data folder in <MYSQL_HOME>
+
+mysqld --initialize --console
+// login to mysql as superuser 'root'
+
+create database DA;
+create user 'ODBC'@'localhost' identified by '';
+grant all privileges on DA . * to 'ODBC'@'localhost';
+
+// use create_db.sql
