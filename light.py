@@ -2,11 +2,17 @@ import exceptions
 import utils
 import time
 
+# định nghĩa hàm chạy liên lạc với đèn
+# light_id: id của đèn
+# yellow_time: thời gian sáng của đèn vàng, thời gian này là cố định do nó không phụ thuộc vào lượng người lưu thông
 def light(light_id, yellow_time = 2):
+
+    # khởi tạo các client để connect với adafruit dựa trên các key được cung cấp CSE_BBC và CSE_BBC1 (dùng default của VuNguyenLong nếu lỗi)
     clients = [utils.connect_adafruit_io(0), utils.connect_adafruit_io(1)]
     YELLOW_TIME = yellow_time
     LIGHT_ID = light_id
 
+    # hàm đếm ngược
     def clock(kind, t):
         while t > 0:
             print("\r{} {}".format('{0:02b}'.format(kind), t), end='')
@@ -16,8 +22,14 @@ def light(light_id, yellow_time = 2):
 
     prev = None
     while True:
+        
+        # kiểm tra xem đèn có được kích hoạt không
         activated = utils.access_database('select activated from lights where id = {}'.format(LIGHT_ID))[0][0]
+
+        # giá trị của activated được lưu là {0, 1} nên khi chuyển thành xanh và đỏ phải cộng thêm 1
         utils.set_activated_light(clients[0], activated + 1)
+
+        # nhận diện cạnh lên (từ 0 lên 1) của nút chạm, nếu có sẽ tự động nghịch đảo giá trị activated
         if prev is not None and prev != 1:
             new = utils.get_touch_value(clients[0])
             if prev == 0 and new == 1:
@@ -92,4 +104,5 @@ def light(light_id, yellow_time = 2):
             utils.set_traffic_light_values(clients[0], utils.LIGHT_VALUES.OFF)
             time.sleep(5)
 
+# tạo một đèn để chạy, do thiếu thiết bị thực nên không thể cùng lúc chạy nhiều đèn
 light(1, yellow_time=5)

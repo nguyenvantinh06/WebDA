@@ -3,7 +3,7 @@ import exceptions
 
 # Request form:
 # {
-#   status:['OK', 'Exit'],
+#   status:['success', 'failed'],
 #   command: ['GET', 'SET'],
 #   args: // GET
 #       {
@@ -20,6 +20,7 @@ import exceptions
 adafruit_io_client = [utils.connect_adafruit_io(0), utils.connect_adafruit_io(1)]
 clients = []
 
+# hàm xử lý thông tin nhận được từ web
 def process(comm, args):
     result = {'status':'', 'data':''}
     data = ''
@@ -28,6 +29,7 @@ def process(comm, args):
             light_id = args['light id']
             attribute = args['attribute']
 
+            # tách điều khiển cho từng lệnh
             if attribute == 'status':
                 loc, lat, activated = utils.access_database(
                     'select Loc, Lat, activated from Lights where id = {}'.format(light_id)

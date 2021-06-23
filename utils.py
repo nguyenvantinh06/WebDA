@@ -5,15 +5,8 @@ import math
 import datetime
 import mysql.connector as db_conn
 
-<<<<<<< Updated upstream
 DEFAULT_USERNAME = ['VuNguyenLong']*2
-DEFAULT_KEY = ['aio_Iwky10iEp5l1D0bisPDBDYn3J7s9']*2
-=======
-DEFAULT_USERNAME = ['VuNguyenLong', 'VuNguyenLong']
-DEFAULT_KEY = ['aio_RbkB61BTGwEqw4wAfDGSo2k2L1u6', 'aio_RbkB61BTGwEqw4wAfDGSo2k2L1u6']
-
-#aio_RbkB61BTGwEqw4wAfDGSo2k2L1u6
->>>>>>> Stashed changes
+DEFAULT_KEY = ['aio_RbkB61BTGwEqw4wAfDGSo2k2L1u6']*2
 
 USERNAME    = ['CSE_BBC', 'CSE_BBC1']
 KEY         = None
