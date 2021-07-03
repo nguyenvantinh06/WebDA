@@ -19,6 +19,7 @@ body {
     height: 100vh;
 }
 
+/*Đinh dạng khung đèn giao thông hiển trị trên web*/
 .traffic-light {
     position: relative;
     background: #222;
@@ -30,6 +31,7 @@ body {
     
 }
 
+/*Đinh dạng ánh sáng đèn giao thông hiển trị trên web*/
 .light-red,
 .light-yellow,
 .light-green {
@@ -89,6 +91,7 @@ body {
     }
 }
 
+/*Đinh dạng khung thông tin đèn hiển trị trên web*/
 #thongtinden {
     border: solid black;
     /*width: 100%;*/
@@ -97,14 +100,15 @@ body {
 
 }
 
+/*Đinh dạng khung bản đồ hiển trị trên web*/
 .maplight {
     width: 100vh; 
     height: 100vh;
     margin: auto;
 }
 
-/* Desktop First, Mobile First change max->min, default cho Desktop, 1024 Tablet, 768 Mobile */
-@media only screen and (max-width: 1366px) {
+/* Desktop First, Mobile First Responsive cho Desktop và các thiết bị khác */
+@media only screen and (max-width: 1367.99px) {
     .traffic-light {
         position: relative;
         background: #222;
@@ -156,16 +160,17 @@ body {
         border-radius: 0px;
         padding: 15px;
         box-shadow: inset 0 0 0px 0px #2a2a2a;
-        /* width:140px; */
-        height: 20vh;
+        width:8vh;
+        height: 18vh;
         
     }
 
     #thongtinden {
         border: solid black;
         /*width: 100%;*/
-        height: 20vh;
+        height: 18vh;
         margin-right: auto;
+        margin-left:auto;
     
     }
 
@@ -179,17 +184,24 @@ body {
         border-radius: 0px;
         padding: 15px;
         box-shadow: inset 0 0 0px 0px #2a2a2a;
-        /* width:140px; */
-        height: 20vh;
+       /* width:8vh;
+        height: 18vh;*/
         
     }
 
     #thongtinden {
         border: solid black;
         /*width: 100%;*/
-        height: 20vh;
+        /* height: 8vh;*/
         margin-right: auto;
+        margin-left:auto;
     
+    }
+
+    .maplight {
+        width: 100vh; 
+        
+        margin: auto;
     }
 
   }
@@ -202,16 +214,23 @@ body {
         border-radius: 0px;
         padding: 15px;
         box-shadow: inset 0 0 0px 0px #2a2a2a;
-        /* width:140px; */
-        height: 20vh;
+       /* width:8vh;
+        height: 8vh;*/
         
     }
 
     #thongtinden {
         border: solid black;
         /*width: 100%;*/
-        height: 20vh;
+       /* height: 8vh;*/
         margin-right: auto;
+        margin-left:auto;
     
+    }
+
+    .maplight {
+        width: 100vh; 
+        
+        margin: auto;
     }
 }

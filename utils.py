@@ -5,14 +5,18 @@ import math
 import datetime
 import mysql.connector as db_conn
 
-DEFAULT_USERNAME = ['VuNguyenLong']*2
-DEFAULT_KEY = ['aio_RbkB61BTGwEqw4wAfDGSo2k2L1u6']*2
+#DEFAULT_USERNAME = ['VuNguyenLong']*2
+#DEFAULT_KEY = ['aio_uPMc07GGSwaME2hxHqVBMJgB4G8M']*2
+DEFAULT_USERNAME = ['VuNguyenLong', 'VuNguyenLong']
+DEFAULT_KEY = ['aio_uPMc07GGSwaME2hxHqVBMJgB4G8M', 'aio_uPMc07GGSwaME2hxHqVBMJgB4G8M']
+
+#aio_uPMc07GGSwaME2hxHqVBMJgB4G8M
 
 USERNAME    = ['CSE_BBC', 'CSE_BBC1']
 KEY         = None
 
 DB_NAME = 'DA'
-DB_USER = 'ODBC'
+DB_USER = 'ODBC1'
 
 class LIGHT_VALUES:
     OFF     = 0
@@ -82,7 +86,7 @@ def load_keys():
             for i in range(len(KEY)):
                 Client(USERNAME[i], KEY[i]).feeds()
         except:
-            print('Error happend, using default keys')
+            print('Error happended, using default keys')
             USERNAME = DEFAULT_USERNAME
             KEY = DEFAULT_KEY
 load_keys()

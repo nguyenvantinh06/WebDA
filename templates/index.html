@@ -4,126 +4,135 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Quản lý giao thông</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Traffic Management</title>
+    <!--Sử dụng các liên kết đến file css và framework bootstrapv4.0-->
+    <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid">      
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-12 col-md-5 col-xg-4 col-lg-3">
+
+        <!--Mô phỏng đèn giao thông của hệ thống khi nhận tín hiệu-->
         <div class="row">
-          <div class="col-sm-12" id= "time">
-            <script>
-              function dongho(){
-                var time = new Date();
-                var gio = time.getHours();
-                var phut= time.getMinutes();
-                var giay=time.getSeconds();
-                if (gio<10)
-                  gio = "0" + gio;
-                if (phut<10)
-                  phut = "0" + phut;
-                if (giay<10)
-                  giay = "0" + giay;
-                document.getElementById("time").innerHTML = gio + ":" + phut + ":" + giay;
-                setTimeout("dongho()",1000);
-              }
-              dongho();
-            </script>
+			    <div class="col-sm-5 col-md-3 col-xg-4 col-lg-4">
+				    <div class="traffic-light">
+				      <div class="light-red" id="red"></div>
+				      <div class="light-yellow" id="yellow"></div>
+				      <div class="light-green" id="green"></div>
+				    </div>
+				  </div>
+
+          <!--Khung hiển thị thông tin đèn giao thông-->
+				  <div class="col-sm-7 col-md-9 col-xg-8 col-lg-8">
+				    <div class ="row" id="thongtinden">
+					    <h6 class="col-sm-12 col-md-12 col-xg-12 col-lg-12" id="light_id"> ID: </h6>
+					    <h6 class="col-sm-12 col-md-12 col-xg-12 col-lg-12" id="strength"> Strength: </h6>
+					    <h6 class="col-sm-12 col-md-12 col-xg-12 col-lg-12" id="density"> Destiny: </h6>
+					    <h6 class="col-sm-12 col-md-12 col-xg-12 col-lg-12" id="waiting_time"> Waiting Time: </h6>
+					    <h6 class="col-sm-12 col-md-12 col-xg-12 col-lg-12" id="running_time"> Running Time: </h6>
+				    </div>
+				  </div>
+        </div>
+
+        <!--Bật/Tắt chế độ điều khiển bằng tay để điều chỉnh các thông số của đèn giao thông-->
+        <div class="col-sm-12 col-md-12 col-xg-12 col-lg-12 card">
+          <div class="card-header btn"  data-toggle="collapse" data-target="#content" onclick="update_manual()">
+            Manual Control
           </div>
-          <div class="row">
-          <div class="col-sm-4">
-            <div class="traffic-light">
-              <div class="protector"></div>
-              <div class="protector"></div>
-              <div class="protector"></div>
-              <div class="light-red"></div>
-              <div class="light-yellow"></div>
-              <div class="light-green"></div>
+          <div class="card-body collapse" id="content" style="border: solid 1px; padding: 10px; background: #ddd;">
+            <div class="form-group row">
+              <label for="waiting-time" class="col-sm-6 col-form-label">Waiting Time:</label>
+              <div class="col-sm-6">
+                <input type="number" class="form-control" id="waiting-time" placeholder="second(s)" min="5" max="120">
+              </div>
             </div>
-        </div>
-        <div class="col-sm-8">
-          <div id="thongtinden">
-            <p>Thông tin đèn tín hiệu</p>
-          </div>
-        </div>
-      </div>
-          <div class="col-sm-12">
-            <h3>Tìm kiếm đèn theo ID hoặc Khu Vực</h3>
+            <div class="form-group row">
+              <label for="running-time" class="col-sm-6 col-form-label">Running Time:</label>
+              <div class="col-sm-6">
+                <input type="number" class="form-control" id="running-time" placeholder="second(s)" min="5" max="120">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="light-strength" class="col-sm-6 col-form-label">Strength:</label>
+              <div class="col-sm-6">
+                <input type="number" class="form-control" id="light-strength" placeholder="%" min="5" max="1000">
+              </div>
+            </div>
             <div class="row">
-                <h5 class="textdiachi">Nhập ID đèn</h4>
-                <div class="col-sm-12 form-group">
-                    <input class="form-control" id="id" name="id" placeholder="D123" type="text" required>
-                </div>
-                <h5 class="textdiachi">Hoặc nhập địa chỉ muốn tìm kiếm</h2>
-                  
-                <div class="col-sm-12 form-group">
-                    <input class="form-control" id="street" name="street" placeholder="Lý Thường Kiệt" type="text" required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="phuong" name="phuong" placeholder="Phường 10" type="text" required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="phuong" name="quan" placeholder="Quận 10" type="text" required>
-                </div>
-                <div class="col-sm-12 form-group text-center">
-                    <button type="search" class="btn btn-default">Tìm kiếm</button>
-                </div>
-                
+              <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary" onclick="set()">Set</button>
+                <button type="reset" class="btn btn-secondary" onclick="reset()">Reset</button>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="tatden form-group text-center">
+                <button type="submit" class="btn btn-primary" id="switch" style="background: red; color:black; margin-top:10px;" onclick="activate()"> Shutdown </button>
+              </div>
             </div>
           </div>
         </div>
+
+        <!--Khung Search Map trên Web-->
+        <div class="col-sm-12 col-md-12 col-xg-12 col-lg-12">
+          <h5 class="text-center" style="text-decoration: bold;">Search Lights</h5>
+          <input class="form-control" id="address" name="address" placeholder="Đại học Bách Khoa" type="text" required>
+        
+        <div class="col-sm-12 form-group text-center">
+          <button type="search" id="target"  class="btn btn-default" onclick="searchmap()" style="margin-top:10px";>Search</button>
+        </div> 
       </div>
-    <div class="col-sm-8" id="map" style="width: 900px; height: 750px;"></div> 
-        <script>
-            function initialize() {
-              var locations = [
-                ['ID:1,Strength:10,Destiny:1, Waiting Time:100', 10.770405280458643, 106.65812003320247, 3],
-                ['DESCRIPTION', 10.763890083944078, 106.65998308150542, 2],
-                ['DESCRIPTION', 10.776432979370345, 106.66355700021649, 1]
-              ];
-          
-              var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: new google.maps.LatLng(10.77334945, 106.65963187),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              });
-          
-              var infowindow = new google.maps.InfoWindow();
-          
-              var marker, i;
-          
-              for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
-                  position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                  map: map
-                });
-          
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                  return function() {
-                    infowindow.setContent(locations[i][0]);
-                    infowindow.open(map, marker);
-                  }
-                })(marker, i));
-              }
-            }
-          
-            function loadScript() {
-              var script = document.createElement('script');
-              script.type = 'text/javascript';
-              script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
-              document.body.appendChild(script);
-            }
-          
-            window.onload = loadScript;
-          </script>
+      </div>
+
+      <!--Khung hiển thị map trên hệ thống điều khiển-->
+      <div class="col-sm-12 col-md-7 col-xg-8 col-lg-9 maplight" id="map"></div>
     </div>
   </div>
+  
+  <!--Định nghĩa các thông tin vị trí, thông số của đèn trên bản đồ-->
+    <script>
+      function initialize() {
+        const n_lights = 3;
+        var locations = [
+          ['Traffic Light 3', 10.770405280458643, 106.65812003320247, 3],
+          ['Traffic Light 2', 10.763890083944078, 106.65998308150542, 2],
+          ['Traffic Light 1', 10.776432979370345, 106.66355700021649, 1]
+        ];
+
+        /*Cài đặt các thông số cho bản đồ*/
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: new google.maps.LatLng(10.77334945, 106.65963187),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker, i;
+        for (i = 0; i < locations.length; i++) {
+          request('GET', {'attribute': 'location', 'light id': i + 1}, set_marker, {'i':i, 'info': infowindow, 'google':google, 'map':map});
+        }
+      }     
+        /*Tải bản đồ qua script*/
+        function loadScript() {
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          /*script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';*/
+          /* API google map được sử dụng cho bản đồ trong hệ thống*/
+          script.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD_-CoBEqQACpQKppdYtdLZAuOYAK_qqPI&callback=initialize';
+          document.body.appendChild(script);
+        }
+            window.onload = loadScript;
+    </script>
+    <!--Import các file script được sử dụng trong web-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="js/fun.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="static/js/fun.js"></script>
+    <script src="static/js/utils.js"></script>
 </body>
 </html>
+

@@ -14,7 +14,7 @@ def home():
         return response
 	
     # phản hồi lại cho browser
-    return render_template('test.html')
+    return render_template('index.html')
 
 # method dùng để cập nhật và truy xuất thông tin từ web
 # POST được sử dụng do các message này đều chứa dữ liệu truyền đi chứ không chỉ request

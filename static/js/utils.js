@@ -1,9 +1,11 @@
-const url = '/info/';
-const COMM = 'status'
-let current_light_info = null;
-let current_light_id = null;
-let skip = false;
+// biến global và constant 
+const url = '/info/'; //địa chỉ để request
+const COMM = 'status' //command dùng để refresh
+let current_light_info = null; //info của đèn đang được chọn
+let current_light_id = null; //id của đèn đang được chọn
+let skip = false; //bỏ 1 interval trong vòng lặp update
 
+// Hàm nhận các dữ liệu input
 function collect_inputs()
 {
     const strength = document.getElementById('light-strength').value;
@@ -12,11 +14,12 @@ function collect_inputs()
     return {'running time':run, 'waiting time':wait, 'strength':strength};
 }
 
+// Hàm request dữ liệu lên server
 function request(command, data, callback, args=null)
 {
-    const Http = new XMLHttpRequest();
-    Http.open('POST', url);
-    Http.send(JSON.stringify({"command":command, "args":data}));
+    const Http = new XMLHttpRequest();//gửi 1 request 
+    Http.open('POST', url); //sử dụng post để đấy data qua server
+    Http.send(JSON.stringify({"command":command, "args":data}));//gửi command post qua cho server đính kèm thêm command và data
 
     Http.onload = function(){
         if (Http.readyState === Http.DONE) {
@@ -90,15 +93,17 @@ function set()
 
 function reset()
 {
-
+    document.getElementById('light-strength').innerHTML = current_light_info['strength'].toFixed(5);
+    document.getElementById('waiting-time').innerHTML = current_light_info['waiting time'];
+    document.getElementById('running-time').innerHTML = current_light_info['running time'];
 }
 
 function update()
 {
     swap();
     document.getElementById('light_id').innerHTML = "ID: " + current_light_id;
-    document.getElementById('strength').innerHTML = "Strength: " + current_light_info['strength'];
-    document.getElementById('density').innerHTML = "Destiny: " + current_light_info['density'];
+    document.getElementById('strength').innerHTML = "Strength: " + current_light_info['strength'].toFixed(5);
+    document.getElementById('density').innerHTML = "Destiny: " + current_light_info['density'].toFixed(5);
     document.getElementById('waiting_time').innerHTML = "Waiting Time: " + current_light_info['waiting time'];
     document.getElementById('running_time').innerHTML = "Running Time: " + current_light_info['running time'];
 
@@ -106,11 +111,11 @@ function update()
         document.getElementById('content').classList.toggle('show', true);
     else document.getElementById('content').classList.toggle('show', false);
 
-    document.getElementById('light-strength').placeholder = current_light_info['strength'];
+    document.getElementById('light-strength').placeholder = current_light_info['strength'].toFixed(5);
     document.getElementById('waiting-time').placeholder = current_light_info['waiting time'];
     document.getElementById('running-time').placeholder = current_light_info['running time'];
 
-    document.getElementById('light-strength').defaultValue = current_light_info['strength'];
+    document.getElementById('light-strength').defaultValue = current_light_info['strength'].toFixed(5);
     document.getElementById('waiting-time').defaultValue = current_light_info['waiting time'];
     document.getElementById('running-time').defaultValue = current_light_info['running time'];
 
